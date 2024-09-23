@@ -1,4 +1,4 @@
-package com.sgyj.complimentdiary.modules.repository.entity;
+package com.sgyj.complimentdiary.common;
 
 import com.sgyj.complimentdiary.TestcontainersConfiguration;
 import jakarta.transaction.Transactional;

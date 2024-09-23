@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @DisplayName("일기 테스트")
-class DiaryTest extends InitialTest {
+class DiaryEntriesTest extends InitialTest {
 
     @Autowired
     private DiaryMasterRepository diaryMasterRepository;
