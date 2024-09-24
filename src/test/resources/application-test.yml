@@ -8,3 +8,7 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create
+jasypt:
+  encryptor:
+    password: compliment_password
+    algorithm: PBEWithMD5AndDES

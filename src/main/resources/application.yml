@@ -1,5 +1,17 @@
 spring:
   application:
     name: compliment-diary
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ENC(uCAF/tG8KOPxvczJNN0TRuo/fHOhj+/2uLc+c4ayEMZ9avD4FGNXSQ59YBD4wqlcAnKZ5c1BK5Ggq+ZC8gN1iQ==)
+    username: ENC(MlyTkM/TD2TZvBT0vhq1WiIxAvCIQms/)
+    password: ENC(AEUzekNWvn/ntAK1vJZWD4oTI0wM0+9C8+WSMLSuG60=)
   jpa:
     show-sql: true
+jasypt:
+  encryptor:
+    password: compliment_password
+    algorithm: PBEWithMD5AndDES
+logging:
+  level:
+    root: DEBUG
