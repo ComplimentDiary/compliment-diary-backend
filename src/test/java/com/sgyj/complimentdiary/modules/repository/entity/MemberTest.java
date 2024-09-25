@@ -2,6 +2,7 @@ package com.sgyj.complimentdiary.modules.repository.entity;
 
 import com.sgyj.complimentdiary.common.InitialTest;
 import com.sgyj.complimentdiary.modules.repository.MemberRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@Slf4j
 @ActiveProfiles("test")
 @DisplayName("회원 데이터 테스트")
 class MemberTest extends InitialTest {
@@ -27,17 +29,6 @@ class MemberTest extends InitialTest {
         // then
         Member findMember = memberRepository.findById(userId).orElseThrow(() -> new IllegalStateException("일치하는 회원이 없습니다."));
         assertEquals(userId, findMember.getUserId());
-    }
-
-    @Test
-    @DisplayName("비밀번호 암호화 테스트")
-    void encrypt_password() throws Exception {
-        // given
-
-        // when
-
-        // then
-
     }
 
 }
