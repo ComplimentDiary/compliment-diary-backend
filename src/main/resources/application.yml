@@ -1,4 +1,7 @@
 spring:
+  config:
+    activate:
+      on-profile: default
   application:
     name: compliment-diary
   datasource:
@@ -14,4 +17,4 @@ jasypt:
     algorithm: PBEWithMD5AndDES
 logging:
   level:
-    root: DEBUG
+    root: INFO
