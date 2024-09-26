@@ -1,11 +1,11 @@
 package com.sgyj.complimentdiary.modules.repository.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -20,21 +20,13 @@ public class UserDiary {
 
     private Long diaryId;
 
-    @OneToMany(mappedBy = "diaryMaster", cascade = CascadeType.ALL)
-    private List<Diary> diaryList;
-
-    @ManyToOne
-    @JoinColumn(name = "userId", referencedColumnName = "userId")
-    private User user;
-
-    public UserDiary(String userId, Long diaryId, List<Diary> diaryEntryList) {
+    public UserDiary(String userId, Long diaryId) {
         this.userId = userId;
         this.diaryId = diaryId;
-        this.diaryList = diaryEntryList;
     }
 
-    public static UserDiary from(String userId, Long diaryId, List<Diary> diaryEntryList) {
-        return new UserDiary(userId, diaryId, diaryEntryList);
+    public static UserDiary from(String userId, Long diaryId) {
+        return new UserDiary(userId, diaryId);
     }
 
 }

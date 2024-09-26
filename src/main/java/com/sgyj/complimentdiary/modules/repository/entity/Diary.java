@@ -1,6 +1,8 @@
 package com.sgyj.complimentdiary.modules.repository.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,11 +19,6 @@ public class Diary {
     private String content;
 
     private int rating;
-
-    @ManyToOne
-    @JoinColumn(name = "DIARY_MASTER_DATE", referencedColumnName = "date")
-    @JoinColumn(name = "DIARY_MASTER_USERID", referencedColumnName = "userid")
-    private UserDiary userDiary;
 
     public Diary(String content, int rating) {
         this.content = content;

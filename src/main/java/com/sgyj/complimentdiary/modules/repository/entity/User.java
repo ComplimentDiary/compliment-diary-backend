@@ -25,7 +25,7 @@ public class User extends UpdatedAt {
 
     private String password;
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<UserDiary> userDiaryList = new ArrayList<>();
 
     public User(String userId, String username, String password, String email) {

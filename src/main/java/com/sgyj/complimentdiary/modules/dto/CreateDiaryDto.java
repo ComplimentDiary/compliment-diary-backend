@@ -13,4 +13,6 @@ public class CreateDiaryDto {
 
     List<DiaryContentDto> diaryContentList;
 
+    List<String> imageUrlList;
+
 }

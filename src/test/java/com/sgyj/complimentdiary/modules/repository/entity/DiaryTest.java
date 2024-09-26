@@ -1,8 +1,8 @@
 package com.sgyj.complimentdiary.modules.repository.entity;
 
 import com.sgyj.complimentdiary.common.InitialTest;
-import com.sgyj.complimentdiary.modules.repository.DiaryMasterRepository;
 import com.sgyj.complimentdiary.modules.repository.DiaryRepository;
+import com.sgyj.complimentdiary.modules.repository.UserDiaryRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 class DiaryTest extends InitialTest {
 
     @Autowired
-    private DiaryMasterRepository diaryMasterRepository;
+    private UserDiaryRepository userDiaryRepository;
 
     @Autowired
     private DiaryRepository diaryRepository;

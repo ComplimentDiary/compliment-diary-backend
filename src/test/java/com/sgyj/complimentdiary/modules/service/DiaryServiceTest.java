@@ -4,8 +4,8 @@ import com.sgyj.complimentdiary.common.InitialTest;
 import com.sgyj.complimentdiary.global.exception.ExceedContentException;
 import com.sgyj.complimentdiary.modules.dto.CreateDiaryDto;
 import com.sgyj.complimentdiary.modules.dto.DiaryContentDto;
-import com.sgyj.complimentdiary.modules.repository.DiaryMasterRepository;
 import com.sgyj.complimentdiary.modules.repository.DiaryRepository;
+import com.sgyj.complimentdiary.modules.repository.UserDiaryRepository;
 import com.sgyj.complimentdiary.modules.repository.UserRepository;
 import com.sgyj.complimentdiary.modules.repository.entity.Diary;
 import com.sgyj.complimentdiary.modules.repository.entity.User;
@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class DiaryServiceTest extends InitialTest {
 
     @Autowired
-    private DiaryMasterRepository diaryMasterRepository;
+    private UserDiaryRepository userDiaryRepository;
 
     @Autowired
     private DiaryRepository diaryRepository;
@@ -49,10 +49,10 @@ class DiaryServiceTest extends InitialTest {
         // then
         diaryRepository.save(diaryEntry);
         UserDiary userDiary = UserDiary.from("yeji", diaryEntry.getId(), List.of(diaryEntry));
-        diaryMasterRepository.save(userDiary);
+        userDiaryRepository.save(userDiary);
 
         UserDiary findUserDiary =
-                diaryMasterRepository.findByUserIdAndDate("yeji", "2024-09-28").orElseThrow(() -> new IllegalStateException("일치하는 데이터가 없습니다."));
+            userDiaryRepository.findByUserIdAndDate("yeji", "2024-09-28").orElseThrow(() -> new IllegalStateException("일치하는 데이터가 없습니다."));
 
         assertEquals(1, findUserDiary.getDiaryList().size());
     }
@@ -79,7 +79,7 @@ class DiaryServiceTest extends InitialTest {
         // UserDiary userDiary = UserDiary.from("yeji", , diaryList);
         // diaryMasterRepository.save(userDiary);
         UserDiary findUserDiary =
-                diaryMasterRepository.findByUserIdAndDate("yeji", "2024-09-28").orElseThrow(() -> new IllegalStateException("일치하는 데이터가 없습니다."));
+            userDiaryRepository.findByUserIdAndDate("yeji", "2024-09-28").orElseThrow(() -> new IllegalStateException("일치하는 데이터가 없습니다."));
         // then
         assertEquals(3, findUserDiary.getDiaryList().size());
     }
