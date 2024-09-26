@@ -1,7 +1,7 @@
 package com.sgyj.complimentdiary.modules.dto;
 
-import com.sgyj.complimentdiary.modules.repository.entity.DiaryEntries;
-import com.sgyj.complimentdiary.modules.repository.entity.DiaryMaster;
+import com.sgyj.complimentdiary.modules.repository.entity.Diary;
+import com.sgyj.complimentdiary.modules.repository.entity.UserDiary;
 import lombok.Data;
 
 import java.util.List;
@@ -15,14 +15,14 @@ public class DiaryResultDto {
 
     List<DiaryContentDto> diaryContentList;
 
-    public DiaryResultDto(String userId, String date, List<DiaryEntries> diaryEntriesList) {
+    public DiaryResultDto(String userId, String date, List<Diary> diaryList) {
         this.userId = userId;
         this.date = date;
-        this.diaryContentList = DiaryContentDto.from(diaryEntriesList);
+        this.diaryContentList = DiaryContentDto.from(diaryList);
     }
 
-    public static DiaryResultDto from(DiaryMaster diaryMaster) {
-        return new DiaryResultDto(diaryMaster.getUserId(), diaryMaster.getDate(), diaryMaster.getDiaryEntriesList());
+    public static DiaryResultDto from(UserDiary userDiary) {
+        return new DiaryResultDto(userDiary.getUserId(), userDiary.getDate(), userDiary.getDiaryList());
     }
 
 }

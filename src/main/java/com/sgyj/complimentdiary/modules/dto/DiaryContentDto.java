@@ -1,35 +1,30 @@
 package com.sgyj.complimentdiary.modules.dto;
 
-import com.sgyj.complimentdiary.modules.repository.entity.DiaryEntries;
-import com.sgyj.complimentdiary.modules.repository.entity.enums.DiaryContentType;
+import com.sgyj.complimentdiary.modules.repository.entity.Diary;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@NoArgsConstructor
 @Data
 public class DiaryContentDto {
 
-    private DiaryContentType contentType;
-
     private String content;
-
-    private String image;
 
     private int rating;
 
-    public DiaryContentDto(DiaryEntries diaryEntries) {
-        this.contentType = diaryEntries.getContentType();
-        this.content = diaryEntries.getContent();
-        this.image = diaryEntries.getImage();
-        this.rating = diaryEntries.getRating();
+    public DiaryContentDto(Diary diary) {
+        this.content = diary.getContent();
+        this.rating = diary.getRating();
     }
 
-    public static List<DiaryContentDto> from(List<DiaryEntries> diaryEntriesList) {
-        return diaryEntriesList.stream().map(DiaryContentDto::from).toList();
+    public static List<DiaryContentDto> from(List<Diary> diaryList) {
+        return diaryList.stream().map(DiaryContentDto::from).toList();
     }
 
-    private static DiaryContentDto from(DiaryEntries diaryEntries) {
-        return new DiaryContentDto(diaryEntries);
+    private static DiaryContentDto from(Diary diary) {
+        return new DiaryContentDto(diary);
     }
 
 }

@@ -14,26 +14,29 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-public class Member {
+public class User extends UpdatedAt {
 
     @Id
     private String userId;
 
     private String username;
 
+    private String email;
+
     private String password;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<DiaryMaster> diaryMasterList = new ArrayList<>();
+    private List<UserDiary> userDiaryList = new ArrayList<>();
 
-    public Member(String userId, String username, String password) {
+    public User(String userId, String username, String password, String email) {
         this.userId = userId;
         this.username = username;
         this.password = password;
+        this.email = email;
     }
 
-    public static Member from(String userId, String username, String password) {
-        return new Member(userId, username, password);
+    public static User from(String userId, String username, String password, String email) {
+        return new User(userId, username, password, email);
     }
 
 }
