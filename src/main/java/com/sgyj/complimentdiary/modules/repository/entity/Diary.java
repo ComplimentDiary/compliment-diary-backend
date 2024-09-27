@@ -1,8 +1,6 @@
 package com.sgyj.complimentdiary.modules.repository.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,13 +18,18 @@ public class Diary {
 
     private int rating;
 
-    public Diary(String content, int rating) {
+    @ManyToOne
+    @JoinColumn(name = "user_diary_id")
+    private UserDiary userDiary;
+
+    public Diary(String content, int rating, UserDiary userDiary) {
         this.content = content;
         this.rating = rating;
+        this.userDiary = userDiary;
     }
 
-    public static Diary from(String content, int rating) {
-        return new Diary(content, rating);
+    public static Diary from(String content, int rating, UserDiary userDiary) {
+        return new Diary(content, rating, userDiary);
     }
 
 }

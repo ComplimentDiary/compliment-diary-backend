@@ -11,15 +11,18 @@ import com.sgyj.complimentdiary.modules.repository.entity.Diary;
 import com.sgyj.complimentdiary.modules.repository.entity.User;
 import com.sgyj.complimentdiary.modules.repository.entity.UserDiary;
 import jakarta.transaction.Transactional;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@ActiveProfiles("test")
 @Transactional
 @DisplayName("일기 테스트")
 class DiaryServiceTest extends InitialTest {
@@ -36,60 +39,63 @@ class DiaryServiceTest extends InitialTest {
     @Autowired
     private DiaryService diaryService;
 
+    @BeforeEach
+    public void init() {
+        User user = User.from("yeji", "yeji", "yeji", "yeji.cho@email.com");
+        userRepository.save(user);
+    }
+
     @Test
     @DisplayName("일기 등록 테스트")
     void test_case_1() throws Exception {
         // given
-        User user = User.from("yeji", "yeji", "yeji", "yeji.cho@email.com");
-        userRepository.save(user);
+        User user = userRepository.findById("yeji").orElseThrow(() -> new IllegalStateException("일치하는 회원이 없습니다."));
+
         // when
+        UserDiary userDiary = UserDiary.from(user, "2024-09-28");
+
         String content = "칼퇴해서 집에왔다.";
         int rating = 4;
-        Diary diaryEntry = Diary.from(content, rating);
+        Diary diaryEntry = Diary.from(content, rating, userDiary);
         // then
-        diaryRepository.save(diaryEntry);
-        UserDiary userDiary = UserDiary.from("yeji", diaryEntry.getId(), List.of(diaryEntry));
+        userDiary.getDiaryList().add(diaryEntry);
         userDiaryRepository.save(userDiary);
+        diaryRepository.save(diaryEntry);
 
-        UserDiary findUserDiary =
-            userDiaryRepository.findByUserIdAndDate("yeji", "2024-09-28").orElseThrow(() -> new IllegalStateException("일치하는 데이터가 없습니다."));
-
-        assertEquals(1, findUserDiary.getDiaryList().size());
+        assertEquals(1, userDiary.getDiaryList().size());
     }
 
-    // TODO 테스트코드 수정 필요
     @Test
     @DisplayName("일기 내용 등록 테스트 - 최대 3개까지만 가능")
     void test_case_2() throws Exception {
         // given
-        User user = User.from("yeji", "yeji", "yeji", "yeji.cho@email.com");
-        userRepository.save(user);
+        User user = userRepository.findById("yeji").orElseThrow(() -> new IllegalStateException("일치하는 회원이 없습니다."));
+
+        UserDiary userDiary = UserDiary.from(user, "2024-09-28");
+
         // when
         String content1 = "손을 씻었다.";
         String content2 = "자리를 양보해 드렸다.";
         String content3 = "공부를 했다.";
         int rating = 4;
-        Diary diaryEntry1 = Diary.from(content1, rating);
-        Diary diaryEntry2 = Diary.from(content2, rating);
-        Diary diaryEntry3 = Diary.from(content3, rating);
+        Diary diaryEntry1 = Diary.from(content1, rating, userDiary);
+        Diary diaryEntry2 = Diary.from(content2, rating, userDiary);
+        Diary diaryEntry3 = Diary.from(content3, rating, userDiary);
 
         List<Diary> diaryList = List.of(diaryEntry1, diaryEntry2, diaryEntry3);
+        userDiary.getDiaryList().addAll(diaryList);
         diaryRepository.saveAll(diaryList);
+        userDiaryRepository.save(userDiary);
 
-        // UserDiary userDiary = UserDiary.from("yeji", , diaryList);
-        // diaryMasterRepository.save(userDiary);
-        UserDiary findUserDiary =
-            userDiaryRepository.findByUserIdAndDate("yeji", "2024-09-28").orElseThrow(() -> new IllegalStateException("일치하는 데이터가 없습니다."));
         // then
-        assertEquals(3, findUserDiary.getDiaryList().size());
+        assertEquals(3, userDiary.getDiaryList().size());
     }
 
     @Test
     @DisplayName("일기 칭찬글이 지정된 갯수를 넘어선 경우 에러 발생")
     void test_case_3() throws Exception {
         // given
-        User user = User.from("yeji", "yeji", "yeji", "yeji.cho@email.com");
-        userRepository.save(user);
+
         DiaryContentDto diaryContentDto = new DiaryContentDto();
         diaryContentDto.setContent("청소를 했다.");
 

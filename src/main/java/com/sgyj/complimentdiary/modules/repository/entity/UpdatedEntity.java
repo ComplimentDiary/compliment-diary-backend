@@ -5,7 +5,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
-public class UpdatedAt {
+public class UpdatedEntity {
 
     @CreationTimestamp
     private LocalDateTime createdAt;

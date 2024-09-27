@@ -1,9 +1,6 @@
 package com.sgyj.complimentdiary.modules.repository.entity;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +11,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-public class User extends UpdatedAt {
+public class User extends UpdatedEntity {
 
     @Id
     private String userId;
@@ -25,7 +22,15 @@ public class User extends UpdatedAt {
 
     private String password;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne
+    @JoinColumn(name = "setting_id")
+    private Setting setting;
+
+    @OneToOne
+    @JoinColumn(name = "subscription_id")
+    private Subscription subscription;
+
+    @OneToMany
     private List<UserDiary> userDiaryList = new ArrayList<>();
 
     public User(String userId, String username, String password, String email) {

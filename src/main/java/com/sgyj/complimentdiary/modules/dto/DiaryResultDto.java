@@ -22,7 +22,7 @@ public class DiaryResultDto {
     }
 
     public static DiaryResultDto from(UserDiary userDiary) {
-        return new DiaryResultDto(userDiary.getUserId(), userDiary.getDate(), userDiary.getDiaryList());
+        return new DiaryResultDto(userDiary.getUser().getUserId(), userDiary.getDiaryDate(), userDiary.getDiaryList());
     }
 
 }

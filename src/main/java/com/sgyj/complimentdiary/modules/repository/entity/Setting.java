@@ -1,25 +1,24 @@
 package com.sgyj.complimentdiary.modules.repository.entity;
 
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 
 @Getter
 @Entity
-public class Setting extends UpdatedAt {
+public class Setting extends UpdatedEntity {
 
     @Id
     @GeneratedValue
     private Long id;
-
-    private String userId;
 
     private boolean isNotification;
 
     private String theme;
 
     private String language;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }
