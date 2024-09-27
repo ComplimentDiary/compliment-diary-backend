@@ -27,7 +27,7 @@ class UserServiceTest extends InitialTest {
         createUserRequest.setUsername("yeji");
         createUserRequest.setPassword("yejicho");
 
-        userService.createMember(createUserRequest);
+        userService.createUser(createUserRequest);
         User user = userRepository.findById("yeji").orElseThrow(IllegalArgumentException::new);
         Assertions.assertTrue(passwordEncoder.matches("yejicho", user.getPassword()));
     }
