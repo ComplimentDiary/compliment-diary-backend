@@ -1,4 +1,4 @@
-package com.sgyj.complimentdiary.global.exception;
+package com.sgyj.complimentdiary.global.exceptions;
 
 /**
  * 콘텐츠 등록 허용 갯수가 초과된 경우 에러

@@ -1,7 +1,7 @@
 package com.sgyj.complimentdiary.modules.service;
 
-import com.sgyj.complimentdiary.global.exception.ExceedContentException;
-import com.sgyj.complimentdiary.global.exception.NoMemberException;
+import com.sgyj.complimentdiary.global.exceptions.ExceedContentException;
+import com.sgyj.complimentdiary.global.exceptions.NoMemberException;
 import com.sgyj.complimentdiary.modules.dto.CreateDiaryDto;
 import com.sgyj.complimentdiary.modules.repository.DiaryRepository;
 import com.sgyj.complimentdiary.modules.repository.FileRepository;

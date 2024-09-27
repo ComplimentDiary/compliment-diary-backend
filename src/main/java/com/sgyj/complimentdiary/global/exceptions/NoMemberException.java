@@ -1,4 +1,4 @@
-package com.sgyj.complimentdiary.global.exception;
+package com.sgyj.complimentdiary.global.exceptions;
 
 /**
  * 일치하는 회원이 없을 경우 에러

@@ -1,7 +1,7 @@
 package com.sgyj.complimentdiary.modules.service;
 
-import com.sgyj.complimentdiary.global.exception.NoMatchPasswordException;
-import com.sgyj.complimentdiary.global.exception.NoMemberException;
+import com.sgyj.complimentdiary.global.exceptions.NoMatchPasswordException;
+import com.sgyj.complimentdiary.global.exceptions.NoMemberException;
 import com.sgyj.complimentdiary.modules.dto.CreateUserRequest;
 import com.sgyj.complimentdiary.modules.dto.UserResponse;
 import com.sgyj.complimentdiary.modules.repository.UserRepository;
@@ -21,12 +21,12 @@ public class UserService {
     /**
      * 회원 생성 메소드
      *
-     * @param memberDto
+     * @param createUserRequest
      * @return
      */
-    public UserResponse createMember(CreateUserRequest memberDto) {
-        String encodePassword = passwordEncoder.encode(memberDto.getPassword());
-        User user = User.from(memberDto.getUserId(), memberDto.getUsername(), encodePassword, memberDto.getEmail());
+    public UserResponse createUser(CreateUserRequest createUserRequest) {
+        String encodePassword = passwordEncoder.encode(createUserRequest.getPassword());
+        User user = User.from(createUserRequest.getUserId(), createUserRequest.getUsername(), encodePassword, createUserRequest.getEmail());
         userRepository.save(user);
         return UserResponse.from(user);
     }

@@ -1,4 +1,4 @@
-package com.sgyj.complimentdiary.global.exception;
+package com.sgyj.complimentdiary.global.exceptions;
 
 /**
  * 패스워드 불일치 에러
