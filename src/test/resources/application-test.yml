@@ -1,7 +1,17 @@
 spring:
+  config:
+    activate:
+      on-profile: test
   application:
     name: compliment-diary
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
+jasypt:
+  encryptor:
+    password: compliment_password
+    algorithm: PBEWithMD5AndDES
+logging:
+  level:
+    root: INFO
