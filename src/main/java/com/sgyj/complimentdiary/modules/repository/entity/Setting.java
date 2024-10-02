@@ -8,7 +8,7 @@ import lombok.Getter;
 public class Setting extends UpdatedEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private boolean isNotification;

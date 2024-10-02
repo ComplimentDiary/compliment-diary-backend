@@ -2,6 +2,7 @@ package com.sgyj.complimentdiary.modules.repository.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -14,7 +15,8 @@ import java.time.LocalDateTime;
 @Entity
 public class Subscription extends UpdatedEntity {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String subscriptionType;

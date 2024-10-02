@@ -14,6 +14,7 @@ import java.util.List;
 public class User extends UpdatedEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String userId;
 
     private String username;
