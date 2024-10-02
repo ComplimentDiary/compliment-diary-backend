@@ -14,6 +14,12 @@ public class DiaryController {
 
     private final DiaryService diaryService;
 
+    /**
+     * 일기 등록
+     *
+     * @param createDiaryDto
+     * @return
+     */
     @PostMapping("/register")
     public ResponseEntity<DiaryResultDto> registerDiary(CreateDiaryDto createDiaryDto) {
         return ResponseEntity.ok(diaryService.createDiary(createDiaryDto));

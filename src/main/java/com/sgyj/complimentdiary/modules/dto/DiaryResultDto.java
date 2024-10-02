@@ -6,6 +6,11 @@ import lombok.Data;
 
 import java.util.List;
 
+/**
+ * 일기 결과 dto
+ *
+ * @since 2024.10.02
+ */
 @Data
 public class DiaryResultDto {
 

@@ -6,6 +6,12 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * 일기 내용 dto
+ *
+ * @author yeji.cho
+ * @since 2024.10.02
+ */
 @NoArgsConstructor
 @Data
 public class DiaryContentDto {

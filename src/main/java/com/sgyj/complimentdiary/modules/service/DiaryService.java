@@ -33,6 +33,8 @@ public class DiaryService {
 
     /**
      * 일기 등록
+     * 일기 글은 최대 3개, 이미지 또한 최대 3개까지만 등록 가능함.
+     * 해당 값 설정은 추후 변경될 수 있음. (구독시스템에 의해 관리 예정)
      *
      * @param createDiary
      * @return

@@ -7,6 +7,9 @@ import static org.springframework.beans.BeanUtils.copyProperties;
 
 /**
  * 회원 정보 DTO
+ *
+ * @author yeji.cho
+ * @since 2024.10.02
  */
 @Data
 public class UserResponse {
