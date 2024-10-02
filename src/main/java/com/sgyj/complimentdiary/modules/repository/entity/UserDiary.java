@@ -17,13 +17,13 @@ public class UserDiary {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
 
     private String diaryDate;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Diary> diaryList = new ArrayList<>();
 
     public UserDiary(User user, String diaryDate) {

@@ -23,15 +23,15 @@ public class User extends UpdatedEntity {
 
     private String password;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "setting_id")
     private Setting setting;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subscription_id")
     private Subscription subscription;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private List<UserDiary> userDiaryList = new ArrayList<>();
 
     public User(String userId, String username, String password, String email) {

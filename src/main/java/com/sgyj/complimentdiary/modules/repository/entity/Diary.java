@@ -18,7 +18,7 @@ public class Diary {
 
     private int rating;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_diary_id")
     private UserDiary userDiary;
 
