@@ -3,9 +3,11 @@ package com.sgyj.complimentdiary.modules.controller;
 import com.sgyj.complimentdiary.modules.dto.CreateUserRequest;
 import com.sgyj.complimentdiary.modules.dto.UserResponse;
 import com.sgyj.complimentdiary.modules.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +25,7 @@ public class UserController {
      * @return
      */
     @PostMapping("/register")
-    public ResponseEntity<UserResponse> createUser(CreateUserRequest request) {
+    public ResponseEntity<UserResponse> createUser(@RequestBody @Valid CreateUserRequest request) {
         return ResponseEntity.ok(userService.createUser(request));
     }
 

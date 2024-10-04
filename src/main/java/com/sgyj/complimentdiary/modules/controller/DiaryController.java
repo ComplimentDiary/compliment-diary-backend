@@ -3,9 +3,11 @@ package com.sgyj.complimentdiary.modules.controller;
 import com.sgyj.complimentdiary.modules.dto.CreateDiaryDto;
 import com.sgyj.complimentdiary.modules.dto.DiaryResultDto;
 import com.sgyj.complimentdiary.modules.service.DiaryService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +25,7 @@ public class DiaryController {
      * @return
      */
     @PostMapping("/register")
-    public ResponseEntity<DiaryResultDto> registerDiary(CreateDiaryDto createDiaryDto) {
+    public ResponseEntity<DiaryResultDto> registerDiary(@RequestBody @Valid CreateDiaryDto createDiaryDto) {
         return ResponseEntity.ok(diaryService.createDiary(createDiaryDto));
     }
 
