@@ -5,11 +5,11 @@ import com.sgyj.complimentdiary.global.exceptions.ExceedContentException;
 import com.sgyj.complimentdiary.modules.dto.CreateDiaryDto;
 import com.sgyj.complimentdiary.modules.dto.DiaryContentDto;
 import com.sgyj.complimentdiary.modules.repository.DiaryRepository;
-import com.sgyj.complimentdiary.modules.repository.UserDiaryRepository;
-import com.sgyj.complimentdiary.modules.repository.UserRepository;
+import com.sgyj.complimentdiary.modules.repository.MemberDiaryRepository;
+import com.sgyj.complimentdiary.modules.repository.MemberRepository;
 import com.sgyj.complimentdiary.modules.repository.entity.Diary;
-import com.sgyj.complimentdiary.modules.repository.entity.User;
-import com.sgyj.complimentdiary.modules.repository.entity.UserDiary;
+import com.sgyj.complimentdiary.modules.repository.entity.Member;
+import com.sgyj.complimentdiary.modules.repository.entity.MemberDiary;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -28,67 +28,67 @@ import static org.junit.Assert.assertThrows;
 class DiaryServiceTest extends InitialTest {
 
     @Autowired
-    private UserDiaryRepository userDiaryRepository;
+    private MemberDiaryRepository memberDiaryRepository;
 
     @Autowired
     private DiaryRepository diaryRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private MemberRepository memberRepository;
 
     @Autowired
     private DiaryService diaryService;
 
     @BeforeEach
     public void init() {
-        User user = User.from("yeji", "yeji", "yeji", "yeji.cho@email.com");
-        userRepository.save(user);
+        Member member = Member.from("yeji", "yeji", "yeji", "yeji.cho@email.com");
+        memberRepository.save(member);
     }
 
     @Test
     @DisplayName("일기 등록 테스트")
     void test_case_1() throws Exception {
         // given
-        User user = userRepository.findById("yeji").orElseThrow(() -> new IllegalStateException("일치하는 회원이 없습니다."));
+        Member member = memberRepository.findById("yeji").orElseThrow(() -> new IllegalStateException("일치하는 회원이 없습니다."));
 
         // when
-        UserDiary userDiary = UserDiary.from(user, "2024-09-28");
+        MemberDiary memberDiary = MemberDiary.from(member, "2024-09-28");
 
         String content = "칼퇴해서 집에왔다.";
         int rating = 4;
-        Diary diaryEntry = Diary.from(content, rating, userDiary);
+        Diary diaryEntry = Diary.from(content, rating, memberDiary);
         // then
-        userDiary.getDiaryList().add(diaryEntry);
-        userDiaryRepository.save(userDiary);
+        memberDiary.getDiaryList().add(diaryEntry);
+        memberDiaryRepository.save(memberDiary);
         diaryRepository.save(diaryEntry);
 
-        assertEquals(1, userDiary.getDiaryList().size());
+        assertEquals(1, memberDiary.getDiaryList().size());
     }
 
     @Test
     @DisplayName("일기 내용 등록 테스트 - 최대 3개까지만 가능")
     void test_case_2() throws Exception {
         // given
-        User user = userRepository.findById("yeji").orElseThrow(() -> new IllegalStateException("일치하는 회원이 없습니다."));
+        Member member = memberRepository.findById("yeji").orElseThrow(() -> new IllegalStateException("일치하는 회원이 없습니다."));
 
-        UserDiary userDiary = UserDiary.from(user, "2024-09-28");
+        MemberDiary memberDiary = MemberDiary.from(member, "2024-09-28");
 
         // when
         String content1 = "손을 씻었다.";
         String content2 = "자리를 양보해 드렸다.";
         String content3 = "공부를 했다.";
         int rating = 4;
-        Diary diaryEntry1 = Diary.from(content1, rating, userDiary);
-        Diary diaryEntry2 = Diary.from(content2, rating, userDiary);
-        Diary diaryEntry3 = Diary.from(content3, rating, userDiary);
+        Diary diaryEntry1 = Diary.from(content1, rating, memberDiary);
+        Diary diaryEntry2 = Diary.from(content2, rating, memberDiary);
+        Diary diaryEntry3 = Diary.from(content3, rating, memberDiary);
 
         List<Diary> diaryList = List.of(diaryEntry1, diaryEntry2, diaryEntry3);
-        userDiary.getDiaryList().addAll(diaryList);
+        memberDiary.getDiaryList().addAll(diaryList);
         diaryRepository.saveAll(diaryList);
-        userDiaryRepository.save(userDiary);
+        memberDiaryRepository.save(memberDiary);
 
         // then
-        assertEquals(3, userDiary.getDiaryList().size());
+        assertEquals(3, memberDiary.getDiaryList().size());
     }
 
     @Test

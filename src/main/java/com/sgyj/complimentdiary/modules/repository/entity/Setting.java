@@ -5,6 +5,7 @@ import lombok.Getter;
 
 @Getter
 @Entity
+@Table(name = "setting")
 public class Setting extends UpdatedEntity {
 
     @Id
@@ -18,7 +19,7 @@ public class Setting extends UpdatedEntity {
     private String language;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "member_id")
+    private Member member;
 
 }

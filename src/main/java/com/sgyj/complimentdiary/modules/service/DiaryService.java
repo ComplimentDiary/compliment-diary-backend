@@ -6,12 +6,12 @@ import com.sgyj.complimentdiary.modules.dto.CreateDiaryDto;
 import com.sgyj.complimentdiary.modules.dto.DiaryResultDto;
 import com.sgyj.complimentdiary.modules.repository.DiaryRepository;
 import com.sgyj.complimentdiary.modules.repository.FileRepository;
-import com.sgyj.complimentdiary.modules.repository.UserDiaryRepository;
-import com.sgyj.complimentdiary.modules.repository.UserRepository;
+import com.sgyj.complimentdiary.modules.repository.MemberDiaryRepository;
+import com.sgyj.complimentdiary.modules.repository.MemberRepository;
 import com.sgyj.complimentdiary.modules.repository.entity.Diary;
 import com.sgyj.complimentdiary.modules.repository.entity.File;
-import com.sgyj.complimentdiary.modules.repository.entity.User;
-import com.sgyj.complimentdiary.modules.repository.entity.UserDiary;
+import com.sgyj.complimentdiary.modules.repository.entity.Member;
+import com.sgyj.complimentdiary.modules.repository.entity.MemberDiary;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,9 +21,9 @@ import java.util.List;
 @Service
 public class DiaryService {
 
-    private final UserRepository userRepository;
+    private final MemberRepository memberRepository;
 
-    private final UserDiaryRepository userDiaryRepository;
+    private final MemberDiaryRepository memberDiaryRepository;
 
     private final DiaryRepository diaryRepository;
 
@@ -41,30 +41,30 @@ public class DiaryService {
      */
     public DiaryResultDto createDiary(CreateDiaryDto createDiary) {
 
-        User user = userRepository.findById(createDiary.getUserId()).orElseThrow(() -> new NoMemberException("일치하는 회원을 찾을 수 없습니다."));
+        Member member = memberRepository.findById(createDiary.getUserId()).orElseThrow(() -> new NoMemberException("일치하는 회원을 찾을 수 없습니다."));
 
-        UserDiary userDiary = userDiaryRepository.findByUserAndDiaryDate(user, createDiary.getDate()).orElse(UserDiary.from(user, createDiary.getDate()));
+        MemberDiary memberDiary = memberDiaryRepository.findByMemberAndDiaryDate(member, createDiary.getDate()).orElse(MemberDiary.from(member, createDiary.getDate()));
 
         List<Diary> diaryList =
                 createDiary.getDiaryContentList().stream().map(diaryEntries -> Diary.from(diaryEntries.getContent(),
                         diaryEntries.getRating(),
-                        userDiary)).toList();
+                        memberDiary)).toList();
 
-        if (userDiary.getDiaryList().size() + diaryList.size() > MAX_CONTENT_COUNT) {
+        if (memberDiary.getDiaryList().size() + diaryList.size() > MAX_CONTENT_COUNT) {
             throw new ExceedContentException("등록 가능한 콘텐츠 수를 벗어났습니다.");
         }
 
-        userDiary.getDiaryList().addAll(diaryList);
-        userDiaryRepository.save(userDiary);
+        memberDiary.getDiaryList().addAll(diaryList);
+        memberDiaryRepository.save(memberDiary);
         diaryRepository.saveAll(diaryList);
 
         if (!createDiary.getImageUrlList().isEmpty()) {
             List<File> fileList =
-                    createDiary.getImageUrlList().stream().map(imageUrl -> File.of(userDiary.getId(), imageUrl)).toList();
+                    createDiary.getImageUrlList().stream().map(imageUrl -> File.of(memberDiary.getId(), imageUrl)).toList();
             fileRepository.saveAll(fileList);
         }
 
-        return DiaryResultDto.from(userDiary);
+        return DiaryResultDto.from(memberDiary);
     }
 
 }

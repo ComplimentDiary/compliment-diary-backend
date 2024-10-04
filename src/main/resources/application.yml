@@ -1,7 +1,7 @@
 spring:
   config:
     activate:
-      on-profile: default
+      on-profile: local
   application:
     name: compliment-diary
   datasource:

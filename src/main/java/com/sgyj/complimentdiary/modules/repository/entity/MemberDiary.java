@@ -11,28 +11,30 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-public class UserDiary {
+@Table(name = "member_diary")
+public class MemberDiary {
 
     @Id
+    @Column(name = "member_diary_id")
     @GeneratedValue
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     private String diaryDate;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "memberDiary")
     private List<Diary> diaryList = new ArrayList<>();
 
-    public UserDiary(User user, String diaryDate) {
-        this.user = user;
+    public MemberDiary(Member member, String diaryDate) {
+        this.member = member;
         this.diaryDate = diaryDate;
     }
 
-    public static UserDiary from(User user, String diaryDate) {
-        return new UserDiary(user, diaryDate);
+    public static MemberDiary from(Member member, String diaryDate) {
+        return new MemberDiary(member, diaryDate);
     }
 
 }

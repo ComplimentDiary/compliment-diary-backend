@@ -2,20 +2,20 @@ package com.sgyj.complimentdiary.modules.service;
 
 import com.sgyj.complimentdiary.common.InitialTest;
 import com.sgyj.complimentdiary.modules.dto.CreateUserRequest;
-import com.sgyj.complimentdiary.modules.repository.UserRepository;
-import com.sgyj.complimentdiary.modules.repository.entity.User;
+import com.sgyj.complimentdiary.modules.repository.MemberRepository;
+import com.sgyj.complimentdiary.modules.repository.entity.Member;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-class UserServiceTest extends InitialTest {
+class MemberServiceTest extends InitialTest {
 
     @Autowired
     private UserService userService;
 
     @Autowired
-    private UserRepository userRepository;
+    private MemberRepository memberRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -28,8 +28,8 @@ class UserServiceTest extends InitialTest {
         createUserRequest.setPassword("yejicho");
 
         userService.createUser(createUserRequest);
-        User user = userRepository.findById("yeji").orElseThrow(IllegalArgumentException::new);
-        Assertions.assertTrue(passwordEncoder.matches("yejicho", user.getPassword()));
+        Member member = memberRepository.findById("yeji").orElseThrow(IllegalArgumentException::new);
+        Assertions.assertTrue(passwordEncoder.matches("yejicho", member.getPassword()));
     }
 
 }

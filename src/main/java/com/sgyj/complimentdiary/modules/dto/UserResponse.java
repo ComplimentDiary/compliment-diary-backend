@@ -1,6 +1,6 @@
 package com.sgyj.complimentdiary.modules.dto;
 
-import com.sgyj.complimentdiary.modules.repository.entity.User;
+import com.sgyj.complimentdiary.modules.repository.entity.Member;
 import lombok.Data;
 
 import static org.springframework.beans.BeanUtils.copyProperties;
@@ -18,9 +18,9 @@ public class UserResponse {
     private String username;
     private String password;
 
-    public static UserResponse from(User user) {
+    public static UserResponse from(Member member) {
         UserResponse userResponse = new UserResponse();
-        copyProperties(user, userResponse);
+        copyProperties(member, userResponse);
         return userResponse;
     }
 }
