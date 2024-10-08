@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
+@Table(name = "diary")
 public class Diary {
 
     @Id
@@ -19,17 +20,17 @@ public class Diary {
     private int rating;
 
     @ManyToOne
-    @JoinColumn(name = "user_diary_id")
-    private UserDiary userDiary;
+    @JoinColumn(name = "member_diary_id")
+    private MemberDiary memberDiary;
 
-    public Diary(String content, int rating, UserDiary userDiary) {
+    public Diary(String content, int rating, MemberDiary memberDiary) {
         this.content = content;
         this.rating = rating;
-        this.userDiary = userDiary;
+        this.memberDiary = memberDiary;
     }
 
-    public static Diary from(String content, int rating, UserDiary userDiary) {
-        return new Diary(content, rating, userDiary);
+    public static Diary from(String content, int rating, MemberDiary memberDiary) {
+        return new Diary(content, rating, memberDiary);
     }
 
 }

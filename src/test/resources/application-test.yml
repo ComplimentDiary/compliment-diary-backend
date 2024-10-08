@@ -8,10 +8,13 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
 jasypt:
   encryptor:
     password: compliment_password
     algorithm: PBEWithMD5AndDES
 logging:
   level:
-    root: INFO
+    root: debug

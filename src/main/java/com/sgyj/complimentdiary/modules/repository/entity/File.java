@@ -1,38 +1,37 @@
 package com.sgyj.complimentdiary.modules.repository.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-public class File {
+@Table(name = "file")
+public class File extends UpdatedEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Long userDiaryId;
+    private Long memberDiaryId;
 
     private String imageUrl;
 
-    @UpdateTimestamp
+    @CreatedDate
     private LocalDateTime uploadedAt;
 
-    public File(Long userDiaryId, String imageUrl) {
-        this.userDiaryId = userDiaryId;
+    public File(Long memberDiaryId, String imageUrl) {
+        this.memberDiaryId = memberDiaryId;
         this.imageUrl = imageUrl;
     }
 
-    public static File of(Long userDiaryId, String imageUrl) {
-        return new File(userDiaryId, imageUrl);
+    public static File of(Long memberDiaryId, String imageUrl) {
+        return new File(memberDiaryId, imageUrl);
     }
 
 }

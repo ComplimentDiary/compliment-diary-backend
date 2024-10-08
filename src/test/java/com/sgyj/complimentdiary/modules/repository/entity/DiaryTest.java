@@ -2,7 +2,7 @@ package com.sgyj.complimentdiary.modules.repository.entity;
 
 import com.sgyj.complimentdiary.common.InitialTest;
 import com.sgyj.complimentdiary.modules.repository.DiaryRepository;
-import com.sgyj.complimentdiary.modules.repository.UserDiaryRepository;
+import com.sgyj.complimentdiary.modules.repository.MemberDiaryRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 class DiaryTest extends InitialTest {
 
     @Autowired
-    private UserDiaryRepository userDiaryRepository;
+    private MemberDiaryRepository memberDiaryRepository;
 
     @Autowired
     private DiaryRepository diaryRepository;
@@ -21,7 +21,7 @@ class DiaryTest extends InitialTest {
     void test_case_1() throws Exception {
         // given
         String date = "2024-09-23";
-        String userId = "yeji";
+        String memberId = "yeji";
         String content1 = "나 오늘 책상에 앉았어.";
         // when
 

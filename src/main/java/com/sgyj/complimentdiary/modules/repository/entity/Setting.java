@@ -5,10 +5,11 @@ import lombok.Getter;
 
 @Getter
 @Entity
+@Table(name = "setting")
 public class Setting extends UpdatedEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private boolean isNotification;
@@ -17,8 +18,8 @@ public class Setting extends UpdatedEntity {
 
     private String language;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
 
 }

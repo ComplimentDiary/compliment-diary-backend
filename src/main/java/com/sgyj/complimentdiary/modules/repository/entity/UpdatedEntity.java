@@ -1,16 +1,32 @@
 package com.sgyj.complimentdiary.modules.repository.entity;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import jakarta.persistence.Column;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.MappedSuperclass;
+import lombok.Getter;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
+@EntityListeners(AuditingEntityListener.class)
+@Getter
+@MappedSuperclass
 public class UpdatedEntity {
 
-    @CreationTimestamp
+    @CreatedDate
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
-    @UpdateTimestamp
+    @CreatedBy
+    private String createdBy;
+
+    @LastModifiedDate
     private LocalDateTime updatedAt;
 
+    @LastModifiedBy
+    private String updatedBy;
 }
