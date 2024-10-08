@@ -1,7 +1,7 @@
 package com.sgyj.complimentdiary.modules.controller;
 
 import com.sgyj.complimentdiary.modules.dto.CreateDiaryRequest;
-import com.sgyj.complimentdiary.modules.dto.DiaryResultDto;
+import com.sgyj.complimentdiary.modules.dto.DiaryResultResponse;
 import com.sgyj.complimentdiary.modules.service.DiaryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +25,7 @@ public class DiaryController {
      * @return
      */
     @PostMapping
-    public ResponseEntity<DiaryResultDto> registerDiary(@RequestBody @Valid CreateDiaryRequest createDiaryRequest) {
+    public ResponseEntity<DiaryResultResponse> registerDiary(@RequestBody @Valid CreateDiaryRequest createDiaryRequest) {
         return ResponseEntity.ok(diaryService.createDiary(createDiaryRequest));
     }
 

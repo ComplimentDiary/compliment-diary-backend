@@ -12,7 +12,7 @@ import java.util.List;
  * @since 2024.10.02
  */
 @Data
-public class DiaryResultDto {
+public class DiaryResultResponse {
 
     private String userId;
 
@@ -20,14 +20,14 @@ public class DiaryResultDto {
 
     List<DiaryContent> diaryContentList;
 
-    public DiaryResultDto(String userId, String date, List<Diary> diaryList) {
+    public DiaryResultResponse(String userId, String date, List<Diary> diaryList) {
         this.userId = userId;
         this.date = date;
         this.diaryContentList = DiaryContent.from(diaryList);
     }
 
-    public static DiaryResultDto from(MemberDiary memberDiary) {
-        return new DiaryResultDto(memberDiary.getMember().getMemberId(), memberDiary.getDiaryDate(), memberDiary.getDiaryList());
+    public static DiaryResultResponse from(MemberDiary memberDiary) {
+        return new DiaryResultResponse(memberDiary.getMemberId(), memberDiary.getDiaryDate(), memberDiary.getDiaryList());
     }
 
 }

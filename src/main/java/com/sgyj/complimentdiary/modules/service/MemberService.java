@@ -39,7 +39,7 @@ public class MemberService {
      * @return
      */
     public MemberResponse login(String loginId, String password) {
-        Member member = memberRepository.findById(loginId).orElseThrow(() -> new NoMemberException("일치하는 회원을 찾을 수 없습니다."));
+        Member member = memberRepository.findByMemberId(loginId).orElseThrow(() -> new NoMemberException("일치하는 회원을 찾을 수 없습니다."));
 
         if (!passwordEncoder.matches(member.getPassword(), password)) {
             throw new NoMatchPasswordException("비밀번호가 일치하지 않습니다.");

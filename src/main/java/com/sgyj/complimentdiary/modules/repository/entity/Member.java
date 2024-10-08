@@ -15,7 +15,9 @@ import java.util.List;
 public class Member extends UpdatedEntity {
 
     @Id
-    @Column(name = "member_id")
+    @GeneratedValue
+    private Long id;
+
     private String memberId;
 
     private String memberName;
@@ -40,8 +42,8 @@ public class Member extends UpdatedEntity {
         this.email = email;
     }
 
-    public static Member of(String userId, String username, String password, String email) {
-        return new Member(userId, username, password, email);
+    public static Member of(String memberId, String memberName, String password, String email) {
+        return new Member(memberId, memberName, password, email);
     }
 
 }

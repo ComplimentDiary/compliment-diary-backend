@@ -33,6 +33,11 @@ public class MemberDiary {
         this.diaryDate = diaryDate;
     }
 
+    public String getMemberId() {
+        return this.member.getMemberId();
+    }
+
+
     public static MemberDiary from(Member member, String diaryDate) {
         return new MemberDiary(member, diaryDate);
     }
