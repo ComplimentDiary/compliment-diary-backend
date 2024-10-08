@@ -12,15 +12,15 @@ import static org.springframework.beans.BeanUtils.copyProperties;
  * @since 2024.10.02
  */
 @Data
-public class UserResponse {
+public class MemberResponse {
 
-    private String userId;
-    private String username;
+    private String memberId;
+    private String memberName;
     private String password;
 
-    public static UserResponse from(Member member) {
-        UserResponse userResponse = new UserResponse();
-        copyProperties(member, userResponse);
-        return userResponse;
+    public static MemberResponse from(Member member) {
+        MemberResponse memberResponse = new MemberResponse();
+        copyProperties(member, memberResponse);
+        return memberResponse;
     }
 }

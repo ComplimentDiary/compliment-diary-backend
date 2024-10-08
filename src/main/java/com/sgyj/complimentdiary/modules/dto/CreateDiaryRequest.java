@@ -12,13 +12,13 @@ import java.util.List;
  * @since 2024.10.02
  */
 @Data
-public class CreateDiaryDto {
+public class CreateDiaryRequest {
 
-    private String userId;
+    private String memberId;
 
     private String date;
 
-    List<DiaryContentDto> diaryContentList;
+    List<DiaryContent> diaryContentList;
 
     List<String> imageUrlList;
 

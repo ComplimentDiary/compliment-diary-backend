@@ -10,7 +10,7 @@ import lombok.Data;
  * @since 2024.10.02
  */
 @Data
-public class DiaryContentResultDto {
+public class DiaryContentResultResponse {
 
     private DiaryContentType contentType;
 

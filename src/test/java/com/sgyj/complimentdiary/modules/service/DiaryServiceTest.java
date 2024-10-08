@@ -2,8 +2,8 @@ package com.sgyj.complimentdiary.modules.service;
 
 import com.sgyj.complimentdiary.common.InitialTest;
 import com.sgyj.complimentdiary.global.exceptions.ExceedContentException;
-import com.sgyj.complimentdiary.modules.dto.CreateDiaryDto;
-import com.sgyj.complimentdiary.modules.dto.DiaryContentDto;
+import com.sgyj.complimentdiary.modules.dto.CreateDiaryRequest;
+import com.sgyj.complimentdiary.modules.dto.DiaryContent;
 import com.sgyj.complimentdiary.modules.repository.DiaryRepository;
 import com.sgyj.complimentdiary.modules.repository.MemberDiaryRepository;
 import com.sgyj.complimentdiary.modules.repository.MemberRepository;
@@ -41,7 +41,7 @@ class DiaryServiceTest extends InitialTest {
 
     @BeforeEach
     public void init() {
-        Member member = Member.from("yeji", "yeji", "yeji", "yeji.cho@email.com");
+        Member member = Member.of("yeji", "yeji", "yeji", "yeji.cho@email.com");
         memberRepository.save(member);
     }
 
@@ -96,22 +96,22 @@ class DiaryServiceTest extends InitialTest {
     void test_case_3() throws Exception {
         // given
 
-        DiaryContentDto diaryContentDto = new DiaryContentDto();
-        diaryContentDto.setContent("청소를 했다.");
+        DiaryContent diaryContent = new DiaryContent();
+        diaryContent.setContent("청소를 했다.");
 
-        DiaryContentDto diaryContentDto1 = new DiaryContentDto();
-        diaryContentDto1.setContent("양치를 했다.");
+        DiaryContent diaryContent1 = new DiaryContent();
+        diaryContent1.setContent("양치를 했다.");
 
-        DiaryContentDto diaryContentDto2 = new DiaryContentDto();
-        diaryContentDto2.setContent("숙제를 했다.");
+        DiaryContent diaryContent2 = new DiaryContent();
+        diaryContent2.setContent("숙제를 했다.");
 
-        DiaryContentDto diaryContentDto3 = new DiaryContentDto();
-        diaryContentDto3.setContent("착한일을 했다.");
+        DiaryContent diaryContent3 = new DiaryContent();
+        diaryContent3.setContent("착한일을 했다.");
         // when
-        CreateDiaryDto createDiary = new CreateDiaryDto();
-        createDiary.setUserId("yeji");
+        CreateDiaryRequest createDiary = new CreateDiaryRequest();
+        createDiary.setMemberId("yeji");
         createDiary.setDate("2024-09-28");
-        createDiary.setDiaryContentList(List.of(diaryContentDto, diaryContentDto2, diaryContentDto1, diaryContentDto3));
+        createDiary.setDiaryContentList(List.of(diaryContent, diaryContent2, diaryContent1, diaryContent3));
         // then
 
         assertThrows(ExceedContentException.class, () -> diaryService.createDiary(createDiary));

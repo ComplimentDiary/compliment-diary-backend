@@ -40,7 +40,7 @@ public class Member extends UpdatedEntity {
         this.email = email;
     }
 
-    public static Member from(String userId, String username, String password, String email) {
+    public static Member of(String userId, String username, String password, String email) {
         return new Member(userId, username, password, email);
     }
 

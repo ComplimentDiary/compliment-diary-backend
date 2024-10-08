@@ -11,7 +11,7 @@ import lombok.Data;
  * @since 2024.10.02
  */
 @Data
-public class CreateUserRequest {
+public class CreateMemberRequest {
 
     @NotBlank(message = "사용자 아이디를 입력해주세요.")
     private String userId;

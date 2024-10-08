@@ -14,23 +14,23 @@ import java.util.List;
  */
 @NoArgsConstructor
 @Data
-public class DiaryContentDto {
+public class DiaryContent {
 
     private String content;
 
     private int rating;
 
-    public DiaryContentDto(Diary diary) {
+    public DiaryContent(Diary diary) {
         this.content = diary.getContent();
         this.rating = diary.getRating();
     }
 
-    public static List<DiaryContentDto> from(List<Diary> diaryList) {
-        return diaryList.stream().map(DiaryContentDto::from).toList();
+    public static List<DiaryContent> from(List<Diary> diaryList) {
+        return diaryList.stream().map(DiaryContent::from).toList();
     }
 
-    private static DiaryContentDto from(Diary diary) {
-        return new DiaryContentDto(diary);
+    private static DiaryContent from(Diary diary) {
+        return new DiaryContent(diary);
     }
 
 }

@@ -25,7 +25,7 @@ class MemberTest extends InitialTest {
     void test_case_1() throws Exception {
         // given
         String userId = "yeji";
-        Member member = Member.from(userId, "yeji", "yejicho", "yeji.cho@email.com");
+        Member member = Member.of(userId, "yeji", "yejicho", "yeji.cho@email.com");
         memberRepository.save(member);
         // when
         // then

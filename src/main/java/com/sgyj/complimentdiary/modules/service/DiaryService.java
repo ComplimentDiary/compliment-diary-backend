@@ -2,7 +2,7 @@ package com.sgyj.complimentdiary.modules.service;
 
 import com.sgyj.complimentdiary.global.exceptions.ExceedContentException;
 import com.sgyj.complimentdiary.global.exceptions.NoMemberException;
-import com.sgyj.complimentdiary.modules.dto.CreateDiaryDto;
+import com.sgyj.complimentdiary.modules.dto.CreateDiaryRequest;
 import com.sgyj.complimentdiary.modules.dto.DiaryResultDto;
 import com.sgyj.complimentdiary.modules.repository.DiaryRepository;
 import com.sgyj.complimentdiary.modules.repository.FileRepository;
@@ -39,9 +39,9 @@ public class DiaryService {
      * @param createDiary
      * @return
      */
-    public DiaryResultDto createDiary(CreateDiaryDto createDiary) {
+    public DiaryResultDto createDiary(CreateDiaryRequest createDiary) {
 
-        Member member = memberRepository.findById(createDiary.getUserId()).orElseThrow(() -> new NoMemberException("일치하는 회원을 찾을 수 없습니다."));
+        Member member = memberRepository.findById(createDiary.getMemberId()).orElseThrow(() -> new NoMemberException("일치하는 회원을 찾을 수 없습니다."));
 
         MemberDiary memberDiary = memberDiaryRepository.findByMemberAndDiaryDate(member, createDiary.getDate()).orElse(MemberDiary.from(member, createDiary.getDate()));
 

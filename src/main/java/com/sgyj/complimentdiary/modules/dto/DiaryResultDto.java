@@ -18,12 +18,12 @@ public class DiaryResultDto {
 
     private String date;
 
-    List<DiaryContentDto> diaryContentList;
+    List<DiaryContent> diaryContentList;
 
     public DiaryResultDto(String userId, String date, List<Diary> diaryList) {
         this.userId = userId;
         this.date = date;
-        this.diaryContentList = DiaryContentDto.from(diaryList);
+        this.diaryContentList = DiaryContent.from(diaryList);
     }
 
     public static DiaryResultDto from(MemberDiary memberDiary) {

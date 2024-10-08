@@ -1,8 +1,8 @@
 package com.sgyj.complimentdiary.modules.controller;
 
-import com.sgyj.complimentdiary.modules.dto.CreateUserRequest;
-import com.sgyj.complimentdiary.modules.dto.UserResponse;
-import com.sgyj.complimentdiary.modules.service.UserService;
+import com.sgyj.complimentdiary.modules.dto.CreateMemberRequest;
+import com.sgyj.complimentdiary.modules.dto.MemberResponse;
+import com.sgyj.complimentdiary.modules.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
-@RequestMapping("/api/user")
+@RequestMapping("/api/v1/user")
 @RestController
-public class UserController {
+public class MemberController {
 
-    private final UserService userService;
+    private final MemberService memberService;
 
     /**
      * 회원가입
@@ -24,9 +24,9 @@ public class UserController {
      * @param request
      * @return
      */
-    @PostMapping("/register")
-    public ResponseEntity<UserResponse> createUser(@RequestBody @Valid CreateUserRequest request) {
-        return ResponseEntity.ok(userService.createUser(request));
+    @PostMapping("/signup")
+    public ResponseEntity<MemberResponse> createMember(@RequestBody @Valid CreateMemberRequest request) {
+        return ResponseEntity.ok(memberService.createMember(request));
     }
 
     /**
@@ -37,8 +37,8 @@ public class UserController {
      * @return
      */
     @PostMapping("/login")
-    public ResponseEntity<UserResponse> login(String loginId, String password) {
-        return ResponseEntity.ok(userService.login(loginId, password));
+    public ResponseEntity<MemberResponse> login(String loginId, String password) {
+        return ResponseEntity.ok(memberService.login(loginId, password));
     }
 
 }
