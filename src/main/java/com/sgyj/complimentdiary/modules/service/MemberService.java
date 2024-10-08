@@ -9,6 +9,7 @@ import com.sgyj.complimentdiary.modules.repository.entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -24,6 +25,7 @@ public class MemberService {
      * @param createMemberRequest
      * @return
      */
+    @Transactional
     public MemberResponse createMember(CreateMemberRequest createMemberRequest) {
         String encodePassword = passwordEncoder.encode(createMemberRequest.getPassword());
         Member member = Member.of(createMemberRequest.getMemberId(), createMemberRequest.getMemberName(), encodePassword, createMemberRequest.getEmail());
@@ -38,6 +40,7 @@ public class MemberService {
      * @param password
      * @return
      */
+    @Transactional(readOnly = true)
     public MemberResponse login(String loginId, String password) {
         Member member = memberRepository.findByMemberId(loginId).orElseThrow(() -> new NoMemberException("일치하는 회원을 찾을 수 없습니다."));
 
