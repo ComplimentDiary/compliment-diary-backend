@@ -26,7 +26,7 @@ public class MemberService {
      */
     public MemberResponse createMember(CreateMemberRequest createMemberRequest) {
         String encodePassword = passwordEncoder.encode(createMemberRequest.getPassword());
-        Member member = Member.of(createMemberRequest.getUserId(), createMemberRequest.getUsername(), encodePassword, createMemberRequest.getEmail());
+        Member member = Member.of(createMemberRequest.getMemberId(), createMemberRequest.getMemberName(), encodePassword, createMemberRequest.getEmail());
         memberRepository.save(member);
         return MemberResponse.from(member);
     }

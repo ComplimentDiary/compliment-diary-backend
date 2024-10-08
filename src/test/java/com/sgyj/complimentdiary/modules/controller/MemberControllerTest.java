@@ -32,12 +32,12 @@ class MemberControllerTest {
     @DisplayName("회원가입 성공 테스트")
     void sign_up_success() throws Exception {
         CreateMemberRequest createMemberRequest = new CreateMemberRequest();
-        createMemberRequest.setUserId("yejiCho");
-        createMemberRequest.setUsername("조예지");
+        createMemberRequest.setMemberId("yejiCho");
+        createMemberRequest.setMemberName("조예지");
         createMemberRequest.setPassword("yejiCho");
         createMemberRequest.setEmail("yejiCho@email.com");
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/user/signup")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/member/signup")
                 .content(objectMapper.writeValueAsString(createMemberRequest))
                 .contentType(ContentType.APPLICATION_JSON.toString())).andExpect(status().isOk());
     }

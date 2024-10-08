@@ -21,7 +21,7 @@ class DiaryTest extends InitialTest {
     void test_case_1() throws Exception {
         // given
         String date = "2024-09-23";
-        String userId = "yeji";
+        String memberId = "yeji";
         String content1 = "나 오늘 책상에 앉았어.";
         // when
 

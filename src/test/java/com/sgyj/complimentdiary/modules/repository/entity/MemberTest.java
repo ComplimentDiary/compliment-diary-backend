@@ -24,13 +24,13 @@ class MemberTest extends InitialTest {
     @DisplayName("회원 데이터 생성 테스트")
     void test_case_1() throws Exception {
         // given
-        String userId = "yeji";
-        Member member = Member.of(userId, "yeji", "yejicho", "yeji.cho@email.com");
+        String memberId = "yeji";
+        Member member = Member.of(memberId, "yeji", "yejicho", "yeji.cho@email.com");
         memberRepository.save(member);
         // when
         // then
-        Member findMember = memberRepository.findById(userId).orElseThrow(() -> new IllegalStateException("일치하는 회원이 없습니다."));
-        assertEquals(userId, findMember.getMemberId());
+        Member findMember = memberRepository.findByMemberId(memberId).orElseThrow(() -> new IllegalStateException("일치하는 회원이 없습니다."));
+        assertEquals(memberId, findMember.getMemberId());
     }
 
 }

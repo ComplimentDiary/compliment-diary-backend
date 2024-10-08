@@ -29,8 +29,8 @@ class MemberServiceTest extends InitialTest {
     @Test
     void password_encryption_test() {
         CreateMemberRequest createMemberRequest = new CreateMemberRequest();
-        createMemberRequest.setUserId("yeji");
-        createMemberRequest.setUsername("yeji");
+        createMemberRequest.setMemberId("yeji");
+        createMemberRequest.setMemberName("yeji");
         createMemberRequest.setPassword("yejicho");
 
         memberService.createMember(createMemberRequest);

@@ -14,14 +14,14 @@ import java.util.List;
 @Data
 public class DiaryResultResponse {
 
-    private String userId;
+    private String memberId;
 
     private String date;
 
     List<DiaryContent> diaryContentList;
 
-    public DiaryResultResponse(String userId, String date, List<Diary> diaryList) {
-        this.userId = userId;
+    public DiaryResultResponse(String memberId, String date, List<Diary> diaryList) {
+        this.memberId = memberId;
         this.date = date;
         this.diaryContentList = DiaryContent.from(diaryList);
     }
