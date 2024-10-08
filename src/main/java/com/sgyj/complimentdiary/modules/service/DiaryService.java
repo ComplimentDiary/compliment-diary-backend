@@ -41,7 +41,7 @@ public class DiaryService {
      */
     public DiaryResultResponse createDiary(CreateDiaryRequest createDiary) {
 
-        Member member = memberRepository.findById(createDiary.getMemberId()).orElseThrow(() -> new NoMemberException("일치하는 회원을 찾을 수 없습니다."));
+        Member member = memberRepository.findByMemberId(createDiary.getMemberId()).orElseThrow(() -> new NoMemberException("일치하는 회원을 찾을 수 없습니다."));
 
         MemberDiary memberDiary = memberDiaryRepository.findByMemberAndDiaryDate(member, createDiary.getDate()).orElse(MemberDiary.from(member, createDiary.getDate()));
 

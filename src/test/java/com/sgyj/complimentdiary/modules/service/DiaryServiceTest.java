@@ -49,7 +49,7 @@ class DiaryServiceTest extends InitialTest {
     @DisplayName("일기 등록 테스트")
     void test_case_1() throws Exception {
         // given
-        Member member = memberRepository.findById("yeji").orElseThrow(() -> new IllegalStateException("일치하는 회원이 없습니다."));
+        Member member = memberRepository.findByMemberId("yeji").orElseThrow(() -> new IllegalStateException("일치하는 회원이 없습니다."));
 
         // when
         MemberDiary memberDiary = MemberDiary.from(member, "2024-09-28");
@@ -69,7 +69,7 @@ class DiaryServiceTest extends InitialTest {
     @DisplayName("일기 내용 등록 테스트 - 최대 3개까지만 가능")
     void test_case_2() throws Exception {
         // given
-        Member member = memberRepository.findById("yeji").orElseThrow(() -> new IllegalStateException("일치하는 회원이 없습니다."));
+        Member member = memberRepository.findByMemberId("yeji").orElseThrow(() -> new IllegalStateException("일치하는 회원이 없습니다."));
 
         MemberDiary memberDiary = MemberDiary.from(member, "2024-09-28");
 

@@ -34,7 +34,7 @@ class MemberServiceTest extends InitialTest {
         createMemberRequest.setPassword("yejicho");
 
         memberService.createMember(createMemberRequest);
-        Member member = memberRepository.findById("yeji").orElseThrow(IllegalArgumentException::new);
+        Member member = memberRepository.findByMemberId("yeji").orElseThrow(IllegalArgumentException::new);
         Assertions.assertTrue(passwordEncoder.matches("yejicho", member.getPassword()));
     }
 
