@@ -1,5 +1,6 @@
 package com.sgyj.complimentdiary.modules.service;
 
+import com.sgyj.complimentdiary.global.configuration.JwtUtil;
 import com.sgyj.complimentdiary.global.exceptions.NoMatchPasswordException;
 import com.sgyj.complimentdiary.global.exceptions.NoMemberException;
 import com.sgyj.complimentdiary.modules.dto.CreateMemberRequest;
@@ -18,6 +19,8 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     private final PasswordEncoder passwordEncoder;
+
+    private final JwtUtil jwtUtil;
 
     /**
      * 회원 생성 메소드
@@ -44,11 +47,12 @@ public class MemberService {
     public MemberResponse login(String loginId, String password) {
         Member member = memberRepository.findByMemberId(loginId).orElseThrow(() -> new NoMemberException("일치하는 회원을 찾을 수 없습니다."));
 
-        if (!passwordEncoder.matches(member.getPassword(), password)) {
+        if (!passwordEncoder.matches(password, member.getPassword())) {
             throw new NoMatchPasswordException("비밀번호가 일치하지 않습니다.");
         }
 
-        return MemberResponse.from(member);
+        String accessToken = jwtUtil.createToken(member.getId(), member.getRole().toString());
+        return MemberResponse.of(member, accessToken);
     }
 
 }
