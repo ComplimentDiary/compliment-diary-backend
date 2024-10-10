@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import java.time.ZonedDateTime;
 import java.util.Date;
-import java.util.List;
 
 @RequiredArgsConstructor
 @Component
@@ -22,10 +21,10 @@ public class JwtUtil {
     private final UserDetailsService userDetailsService;
 
 
-    public String createToken(String memberId, List<String> roles) {
+    public String createToken(Long memberId, String role) {
         Claims claims = Jwts.claims();
         claims.put("memberId", memberId);
-        claims.put("roles", roles);
+        claims.put("roles", role);
         ZonedDateTime now = ZonedDateTime.now();
         ZonedDateTime tokenValidity = now.plusSeconds(tokenValidMilisecond);
 

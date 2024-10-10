@@ -20,8 +20,15 @@ public class MemberResponse {
     private String email;
     private String password;
     private RoleType role;
+    private String accessToken;
 
     public static MemberResponse from(Member member) {
+        MemberResponse memberResponse = new MemberResponse();
+        copyProperties(member, memberResponse, "password");
+        return memberResponse;
+    }
+
+    public static MemberResponse of(Member member, String accessToken) {
         MemberResponse memberResponse = new MemberResponse();
         copyProperties(member, memberResponse, "password");
         return memberResponse;

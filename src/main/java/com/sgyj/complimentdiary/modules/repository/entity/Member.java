@@ -1,5 +1,6 @@
 package com.sgyj.complimentdiary.modules.repository.entity;
 
+import com.sgyj.complimentdiary.modules.dto.RoleType;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -26,6 +27,9 @@ public class Member extends UpdatedEntity {
 
     private String password;
 
+    @Enumerated
+    private RoleType role;
+
     @OneToOne(mappedBy = "member")
     private Setting setting;
 
@@ -40,6 +44,7 @@ public class Member extends UpdatedEntity {
         this.memberName = memberName;
         this.password = password;
         this.email = email;
+        this.role = RoleType.ROLE_USER;
     }
 
     public static Member of(String memberId, String memberName, String password, String email) {
