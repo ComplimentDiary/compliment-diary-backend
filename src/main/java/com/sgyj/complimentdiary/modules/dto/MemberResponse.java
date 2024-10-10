@@ -14,13 +14,16 @@ import static org.springframework.beans.BeanUtils.copyProperties;
 @Data
 public class MemberResponse {
 
+    private Long id;
     private String memberId;
     private String memberName;
+    private String email;
     private String password;
+    private RoleType role;
 
     public static MemberResponse from(Member member) {
         MemberResponse memberResponse = new MemberResponse();
-        copyProperties(member, memberResponse);
+        copyProperties(member, memberResponse, "password");
         return memberResponse;
     }
 }
