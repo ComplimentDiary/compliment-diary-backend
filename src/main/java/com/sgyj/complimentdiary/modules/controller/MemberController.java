@@ -6,10 +6,7 @@ import com.sgyj.complimentdiary.modules.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/member")
@@ -37,7 +34,7 @@ public class MemberController {
      * @return
      */
     @PostMapping("/login")
-    public ResponseEntity<MemberResponse> login(String loginId, String password) {
+    public ResponseEntity<MemberResponse> login(@RequestParam String loginId, @RequestParam String password) {
         return ResponseEntity.ok(memberService.login(loginId, password));
     }
 
